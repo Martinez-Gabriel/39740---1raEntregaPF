@@ -29,20 +29,24 @@ class ProductManager {
 
   async addProduct(newProduct) {
     //Validacion para no crear un producto vacio.
-    if (!newProduct) {
-      throw new Error("no se puede crear un producto vacio");
-    }
+    try{
+      if (!newProduct) {
+        throw new Error("no se puede crear un producto vacio");
+      }
 
-    // //Validacion para no repetir code.
-    const arrayProducts = await this.getProducts();
-    if (arrayProducts.find((p) => p.code === newProduct.code)) {
-      throw new Error("No se puede crear un producto con id repetido");
-    }
+      // //Validacion para no repetir code.
+      const arrayProducts = await this.getProducts();
+      if (arrayProducts.find((p) => p.code === newProduct.code)) {
+        throw new Error("No se puede crear un producto con id repetido");
+      }
 
-    //Retornar el producto y asignarle una autoID con spread operator.
-    arrayProducts.push({ id: this.idProduct++, ...newProduct  });
+      //Retornar el producto y asignarle una autoID con spread operator.
+      arrayProducts.push({ id: this.idProduct++, ...newProduct  });
 
     await fs.promises.writeFile(this.path, JSON.stringify(arrayProducts));
+    }catch (error){
+      throw Error;
+    }
   }
 
   async getProductsById(id) {
