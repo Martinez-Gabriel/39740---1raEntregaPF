@@ -33,21 +33,20 @@ class ProductManager {
       throw new Error("no se puede crear un producto vacio");
     }
 
-    //Validacion para no repetir code.
-    if (this.#products.find((p) => p.code === newProduct.code)) {
-      throw new Error("No se puede crear un producto con code repetido");
+    // //Validacion para no repetir code.
+    const arrayProducts = await this.getProducts();
+    if (arrayProducts.find((p) => p.code === newProduct.code)) {
+      throw new Error("No se puede crear un producto con id repetido");
     }
 
     //Retornar el producto y asignarle una autoID con spread operator.
-    this.#products.push({ ...newProduct, id: this.idProduct++ });
+    arrayProducts.push({ id: this.idProduct++, ...newProduct  });
 
-    await fs.promises.writeFile(this.path, JSON.stringify(this.#products));
+    await fs.promises.writeFile(this.path, JSON.stringify(arrayProducts));
   }
 
   async getProductsById(id) {
-    const productById = await fs.promises.readFile(this.path, {
-      encoding: "utf-8",
-    });
+    const productById = await fs.promises.readFile(this.path, {encoding: "utf-8",});
     const DBParse = JSON.parse(productById);
     const contenido = DBParse.find((p) => p.id === id);
     if (!contenido) throw new Error("ERROR, no se encuentra el producto!");
@@ -57,9 +56,7 @@ class ProductManager {
   //Actualizar producto
   async updateProduct(id, newProduct) {
     try {
-      let readProducts = await fs.promises.readFile(this.path, {
-        encoding: "utf-8",
-      });
+      let readProducts = await fs.promises.readFile(this.path, {encoding: "utf-8",});
       const productsParse = JSON.parse(readProducts);
       const productId = productsParse.findIndex((product) => product.id === id);
       productsParse.splice(productId, 1, { id, ...newProduct });
@@ -74,9 +71,7 @@ class ProductManager {
   //Borrar Producto
   async deleteProduct(id) {
     try {
-      let readProducts = await fs.promises.readFile(this.path, {
-        encoding: "utf-8",
-      });
+      let readProducts = await fs.promises.readFile(this.path, {encoding: "utf-8",});
       const productParse = JSON.parse(readProducts);
       const deleteProduct = productParse.filter((p) => p.id !== id);
       await fs.promises.writeFile(this.path, JSON.stringify(deleteProduct));
