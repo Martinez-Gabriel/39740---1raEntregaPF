@@ -1,0 +1,13 @@
+[
+  {
+    "id": 2,
+    "title": "asd",
+    "description": "verde y roja",
+    "code": "10011",
+    "price": 40,
+    "status": true,
+    "stock": 100,
+    "category": "Fruta",
+    "thumbnail": "www.google.com"
+  }
+]

@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 class ProductManager {
-  idProduct = 1;
+  idProduct = 0;
   #products;
 
   constructor() {
@@ -19,6 +19,8 @@ class ProductManager {
       const contenido = await fs.promises.readFile(this.path, {
         encoding: "utf-8",
       });
+      let lastId = JSON.parse(contenido)
+      this.idProduct = lastId[lastId.length-1].id;
       return JSON.parse(contenido);
     } catch (error) {
       console.log(`El archivo ${this.path} no existe, creando...`);
@@ -37,15 +39,15 @@ class ProductManager {
       // //Validacion para no repetir code.
       const arrayProducts = await this.getProducts();
       if (arrayProducts.find((p) => p.code === newProduct.code)) {
-        throw new Error("No se puede crear un producto con id repetido");
+        throw new Error("No se puede crear un producto con code repetido");
       }
 
       //Retornar el producto y asignarle una autoID con spread operator.
-      arrayProducts.push({ id: this.idProduct++, ...newProduct  });
+      arrayProducts.push({ id: ++this.idProduct, ...newProduct });
 
     await fs.promises.writeFile(this.path, JSON.stringify(arrayProducts));
     }catch (error){
-      throw Error;
+      throw new Error;
     }
   }
 
@@ -86,3 +88,5 @@ class ProductManager {
 }
 
 module.exports = ProductManager;
+
+
