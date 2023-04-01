@@ -81,6 +81,7 @@ class ProductManager {
       const productParse = JSON.parse(readProducts);
       const deleteProduct = productParse.filter((p) => p.id !== id);
       await fs.promises.writeFile(this.path, JSON.stringify(deleteProduct));
+      return { message: `El producto ${id} fue eliminado con exito` }
     } catch (e) {
       throw new Error(e);
     }

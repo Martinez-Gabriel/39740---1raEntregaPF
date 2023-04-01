@@ -94,16 +94,18 @@ app.put("/api/products/:pid", async (req, res) => {
 //DELETE ELIMINAR UN PRODUCTO.
 
 app.delete("/api/products/:pid", async (req, res) => {
-  const pid = +req.params.pid;
-  const products = await productManager.getProducts();
-  let currentLength = products.length;
-  if (products.length === currentLength) {
-    res.status(404).send({ status: "error", error: "Product not found" });
+  try {
+    const pid = +req.params.pid;
+    const deleteProductById = await productManager.deleteProduct(Number(pid));
+    res.send(deleteProductById);
+  } catch (error) {
+    res.status(404).send(error);
   }
-  const deleteProduct = await productManager.deleteProduct(pid);
-  console.log(deleteProduct);
-  res.status(200).send({ status: "success", message: "Product delete" });
 });
+
+
+
+
 
 //CONFIGURACION DE PUERTO
 app.listen(8080, () => {
