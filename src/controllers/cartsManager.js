@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 
-class CarManager {
+class CartsManager {
     idProduct = 1;
 
   constructor() {
     this.newCar = [];
-    this.path = "./dataBaseCar.json";
+    this.path = "./cartsDB.json";
   }
 
   async getCar() {
@@ -39,4 +39,4 @@ class CarManager {
 
 }
 
-export default CarManager;
+export default CartsManager;
