@@ -1,5 +1,6 @@
 import express from 'express';
 import productRouter from './routes/productRouter.js';
+import CartRouter from './routes/cartRouter.js';
 
 
 const app = express();
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/products', productRouter);
-// app.use('api/carts', productCarts);
+app.use('api/carts', CartRouter);
 
 //CONFIGURACION DE PUERTO
 app.listen(8080, () => {
