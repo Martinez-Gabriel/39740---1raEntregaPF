@@ -1,3 +1,4 @@
+import { Router } from 'express';
 import CartManager from "../controllers/cartManager.js";
 import ProductManager from "../controllers/productManager.js";
 

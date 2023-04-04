@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/products', productRouter);
-app.use('api/carts', CartRouter);
+app.use('/api/carts', CartRouter);
 
 //CONFIGURACION DE PUERTO
 app.listen(8080, () => {

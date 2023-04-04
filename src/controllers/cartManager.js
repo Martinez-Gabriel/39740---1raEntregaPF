@@ -1,10 +1,10 @@
 import * as fs from "fs";
 
 class CartManager {
-  nextCartID;
+  cartId;
 
   constructor() {
-    this.#nextCartID = 1;
+    this.cartId = 1;
     this.path = "./cartsDB.json";
   }
 
@@ -45,7 +45,7 @@ class CartManager {
       const createCart = [
         ...arrayCarts,
         {
-          id: this.#nextCartID++,
+          id: this.cartId++,
           products: productsCart,
         },
       ];
