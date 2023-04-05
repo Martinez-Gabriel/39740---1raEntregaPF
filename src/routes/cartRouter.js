@@ -7,7 +7,7 @@ const CartRouter = Router ();
 const cartManager = new CartManager();
 const productManager = new ProductManager();
 
-CartRouter.post('/'), async (req, res) => {
+CartRouter.post("/", async (req, res) => {
     try {
         const products = req.body;
         const newCart = await cartManager.addCart(products);
@@ -15,9 +15,9 @@ CartRouter.post('/'), async (req, res) => {
     }catch (error) {
         res.status(500).send(error);
     }
-}
+})
 
-CartRouter.get('/:cid'), async (req, res) => {
+CartRouter.get('/:cid', async (req, res) => {
     try{
         const idCart = +req.params.cid;
         const productsInCart = await cartManager.getProductListByCartId(idCart);
@@ -25,9 +25,18 @@ CartRouter.get('/:cid'), async (req, res) => {
     }catch (error){
         res.status(500).send(error);
     }
-}
+})
 
-CartRouter.post('/:cid/product/:pid'), async (req, res) => {
+CartRouter.get('/', async (req, res) => {
+    try{
+        const arrayCarts = await cartManager.getCarts();
+        res.send(arrayCarts);
+    }catch (error){
+        res.status(500).send(error);
+    }
+})
+
+CartRouter.post('/:cid/product/:pid', async (req, res) => {
     try{
     const idCart = +req.params.cid;
     const idProduct = +req.params.pid;
@@ -38,6 +47,6 @@ CartRouter.post('/:cid/product/:pid'), async (req, res) => {
     }catch (error) {
         res.status(500).send(error)
     }
-}
+})
 
 export default CartRouter;

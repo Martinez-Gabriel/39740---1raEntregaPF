@@ -66,7 +66,7 @@ ProductRouter.post("/", async (req, res) => {
 
 ProductRouter.put("/:pid", async (req, res) => {
   let product = req.body;
-  let pid = req.params.id;
+  let pid = req.params.pid;
 
   if (
     !product.title ||

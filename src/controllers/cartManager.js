@@ -1,11 +1,11 @@
 import * as fs from "fs";
 
 class CartManager {
-  cartId;
+  #cartId;
 
   constructor() {
-    this.cartId = 1;
-    this.path = "./cartsDB.json";
+    this.#cartId = 1;
+    this.path = "./db/cartsDB.json";
   }
 
   async getCarts() {
@@ -13,6 +13,8 @@ class CartManager {
       const contenido = await fs.promises.readFile(this.path, {
         encoding: "utf-8",
       });
+      let lastId = JSON.parse(contenido)
+      this.#cartId = lastId[lastId.length-1].id;
       return JSON.parse(contenido);
     } catch (error) {
       console.log(`El archivo ${this.path} no existe, creando...`);
@@ -45,7 +47,7 @@ class CartManager {
       const createCart = [
         ...arrayCarts,
         {
-          id: this.cartId++,
+          id: this.#cartId++,
           products: productsCart,
         },
       ];
