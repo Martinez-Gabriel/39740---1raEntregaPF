@@ -4,7 +4,7 @@ class CartManager {
   #cartId;
 
   constructor() {
-    this.#cartId = 1;
+    this.#cartId = 0;
     this.path = "./db/cartsDB.json";
   }
 
@@ -47,7 +47,7 @@ class CartManager {
       const createCart = [
         ...arrayCarts,
         {
-          id: this.#cartId++,
+          id: ++this.#cartId,
           products: productsCart,
         },
       ];
@@ -71,13 +71,16 @@ class CartManager {
 
   async addProductToCart(cid, pid) {
     try {
-      const cart = await this.getCartById(cid);
+      const arrayCarts = await this.getCarts();
+      const cart = arrayCarts.find(item => item.id === cid);
+      if(!cart) throw new Error ('El carrito con esa ID no existe!');
+      
       const product = cart.products.find((item) => item.id === pid);
       product
         ? (product.quantity += 1)
         : (cart.products = [...cart.products, { id: pid, quantity: 1 }]);
 
-      await fs.promises.writeFile(this.path, JSON.stringify(cart.products));
+      await fs.promises.writeFile(this.path, JSON.stringify(arrayCarts));
 
       return { message: `El producto se agrego correctamente` };
     } catch (error) {
