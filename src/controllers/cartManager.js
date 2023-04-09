@@ -77,7 +77,7 @@ class CartManager {
         ? (product.quantity += 1)
         : (cart.products = [...cart.products, { id: pid, quantity: 1 }]);
 
-      await fs.promises.writeFile(this.path, JSON.stringify(arrCarts));
+      await fs.promises.writeFile(this.path, JSON.stringify(cart.products));
 
       return { message: `El producto se agrego correctamente` };
     } catch (error) {
