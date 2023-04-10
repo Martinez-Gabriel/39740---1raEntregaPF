@@ -13,8 +13,8 @@ class CartManager {
       const contenido = await fs.promises.readFile(this.path, {
         encoding: "utf-8",
       });
-      let lastId = JSON.parse(contenido)
-      this.#cartId = lastId[lastId.length-1].id;
+      let lastId = JSON.parse(contenido);
+      this.#cartId = lastId[lastId.length - 1].id;
       return JSON.parse(contenido);
     } catch (error) {
       console.log(`El archivo ${this.path} no existe, creando...`);
@@ -72,15 +72,24 @@ class CartManager {
   async addProductToCart(cid, pid) {
     try {
       const arrayCarts = await this.getCarts();
-      const cart = arrayCarts.find(item => item.id === cid);
-      if(!cart) throw new Error ('El carrito con esa ID no existe!');
-      
-      const product = cart.products.find((item) => item.id === pid);
-      product
-        ? (product.quantity += 1)
-        : (cart.products = [...cart.products, { id: pid, quantity: 1 }]);
 
-      await fs.promises.writeFile(this.path, JSON.stringify(arrayCarts));
+      const cartIndex = arrayCarts.findIndex((item) => item.id === cid);
+      if (cartIndex < 0) throw new Error("El carrito con esa ID no existe!");
+
+      const productIndex = arrayCarts[cartIndex].products.findIndex(
+        (item) => item.id === pid
+      );
+      productIndex !== -1
+        ? (arrayCarts[cartIndex].products[productIndex].quantity += 1)
+        : (arrayCarts[cartIndex].products = [
+          ...arrayCarts[cartIndex].products,
+          { id: pid, quantity: 1 },
+        ]);
+
+      await fs.promises.writeFile(
+        this.path, 
+        JSON.stringify(arrayCarts, null, 2)
+        );
 
       return { message: `El producto se agrego correctamente` };
     } catch (error) {
