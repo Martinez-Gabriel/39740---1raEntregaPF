@@ -48,7 +48,7 @@ class CartManager {
         ...arrayCarts,
         {
           id: ++this.#cartId,
-          products: productsCart,
+          products: [],
         },
       ];
 
