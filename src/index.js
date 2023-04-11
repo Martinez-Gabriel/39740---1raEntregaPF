@@ -4,7 +4,8 @@ import CartRouter from './routes/cartRouter.js';
 import HomeRouter from './routes/homeRouter.js';
 import { engine } from 'express-handlebars';
 import { resolve } from 'path';
-
+import { Server } from 'socket.io';
+ 
 void(async() =>
 {
   try
@@ -33,10 +34,18 @@ void(async() =>
 
 
     //CONFIGURACION DE PUERTO
-    app.listen(SERVER_PORT, () => {
+    const httpServer = app.listen(SERVER_PORT, () => {
       console.log(`Server listening on port: ${SERVER_PORT}`);
+    }); 
+
+    const socketServer = new Server(httpServer);
+
+    socketServer.on('connection', socket => {
+      console.log('Cliente conectado');
     });
-  }catch (e)
+
+  }
+  catch (e)
   {
     console.log("Error: ");
     console.log(e);
