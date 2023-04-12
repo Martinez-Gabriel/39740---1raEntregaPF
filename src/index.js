@@ -22,7 +22,7 @@ void(async() =>
     app.use('/api/carts', CartRouter);
     app.use('/api/', HomeRouter);
 
-    const viewsPath = resolve ('/views');
+    const viewsPath = resolve ("./views");
 
     app.engine('handlebars', engine({
       layoutsDir: `${viewsPath}/layouts`,
@@ -30,8 +30,6 @@ void(async() =>
     }));
     app.set('view engine', 'handlebars');
     app.set('views', viewsPath);
-
-
 
     //CONFIGURACION DE PUERTO
     const httpServer = app.listen(SERVER_PORT, () => {
@@ -43,7 +41,6 @@ void(async() =>
     socketServer.on('connection', socket => {
       console.log('Cliente conectado');
     });
-
   }
   catch (e)
   {
