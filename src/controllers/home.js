@@ -1,7 +1,7 @@
 import { request, response } from 'express';
 import ProductManager from './productManager.js';
 
-export const Home = async (req = request, res = response) => {
+export const getHome = async (req = request, res = response) => {
     try {
         const product = new ProductManager();
         const listProducts = await product.getProducts();
