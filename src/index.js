@@ -41,7 +41,7 @@ void (async () => {
 
     //CONFIGURACION DE PUERTO
     const httpServer = app.listen(SERVER_PORT, () => {
-      console.log(`Server listening on port: ${SERVER_PORT}`);
+      console.log(`Server listening on port: localhost:${SERVER_PORT}`);
     });
 
     const socketServer = new Server(httpServer);
