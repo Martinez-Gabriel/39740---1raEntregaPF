@@ -1,9 +1,10 @@
- import { Router } from 'express';
- import { getHome } from '../controllers/home.js';
+import { Router } from "express";
+import { getHome } from "../controllers/home.js";
+import { getRealTimeProducts } from "../controllers/realTimeProducts.js";
 
- const HomeRouter = new Router();
+const HomeRouter = new Router();
 
- HomeRouter.get('/', getHome);
+HomeRouter.get("/", getHome);
+HomeRouter.get("/realtimeproducts", getRealTimeProducts);
 
- export default HomeRouter;
-
+export default HomeRouter;

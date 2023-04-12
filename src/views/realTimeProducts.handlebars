@@ -1,36 +1,48 @@
-<div>
-    <h1>{{{ title }}} </h1>
-    <hr/>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Code</td>
-            <td>Price</td>
-            <td>Status</td>
-            <td>Stock</td>
-            <td>Category</td>
-            <td>Thumbnail</td>
-        </tr>
-        {{#each listProduct}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{title}}</td>
-                <td>{{description}}</td>
-                <td>{{code}}</td>
-                <td>{{price}}</td>
-                <td>{{status}}</td>
-                <td>{{stock}}</td>
-                <td>{{category}}</td>
-                <td>{{thumbnail}}</td>
-            </tr>
-        {{/each}}
-    </table>
+<div >
+  <h1>{{{title}}} </h1>
+  <hr />
+  <table id="idProducts">
+    <tr>
+      <td>Id</td>
+      <td>Title</td>
+      <td>Description</td>
+      <td>Code</td>
+      <td>Price</td>
+      <td>Status</td>
+      <td>Stock</td>
+      <td>Category</td>
+      <td>Thumbnail</td>
+    </tr>
+  </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"
+></script>
 <script>
-    const socket = io();
+  const socket = io(); 
+  socket.emit('lista')
+  
+  socket.on('listaActualizada',
+  (products) => { 
+
+    console.log(products); 
+    const productList = document.getElementById('idProducts');
+    
+    products.forEach((product) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${product.id}</td>
+        <td>${product.title}</td>
+        <td>${product.price}</td>
+        <td>${product.code}</td>
+        <td>${product.price}</td>
+        <td>${product.status}</td>
+        <td>${product.stock}</td>
+        <td>${product.category}</td>
+        <td>${product.thumbnail}</td>`;
+      productList.appendChild(tr);
+    });
+    });
 
 </script>
