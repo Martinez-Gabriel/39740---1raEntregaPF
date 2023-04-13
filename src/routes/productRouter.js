@@ -1,9 +1,8 @@
-import { Router } from 'express';
-import ProductManager from "../controllers/productManager.js"
+import { Router } from "express";
+import ProductManager from "../controllers/productManager.js";
 
 const productManager = new ProductManager();
 const ProductRouter = Router();
-
 
 //GET PRODUCT POR LIMIT.
 ProductRouter.get("/", async (req, res) => {
@@ -63,7 +62,6 @@ ProductRouter.post("/", async (req, res) => {
 });
 
 //PUT ACTUALIZAR UN PRODUCTO.
-
 ProductRouter.put("/:pid", async (req, res) => {
   let product = req.body;
   let pid = req.params.pid;
@@ -88,7 +86,6 @@ ProductRouter.put("/:pid", async (req, res) => {
 });
 
 //DELETE ELIMINAR UN PRODUCTO.
-
 ProductRouter.delete("/:pid", async (req, res) => {
   try {
     const pid = +req.params.pid;
@@ -100,8 +97,3 @@ ProductRouter.delete("/:pid", async (req, res) => {
 });
 
 export default ProductRouter;
-
-
-
-
-

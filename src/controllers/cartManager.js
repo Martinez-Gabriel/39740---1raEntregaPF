@@ -82,14 +82,14 @@ class CartManager {
       productIndex !== -1
         ? (arrayCarts[cartIndex].products[productIndex].quantity += 1)
         : (arrayCarts[cartIndex].products = [
-          ...arrayCarts[cartIndex].products,
-          { id: pid, quantity: 1 },
-        ]);
+            ...arrayCarts[cartIndex].products,
+            { id: pid, quantity: 1 },
+          ]);
 
       await fs.promises.writeFile(
-        this.path, 
+        this.path,
         JSON.stringify(arrayCarts, null, 2)
-        );
+      );
 
       return { message: `El producto se agrego correctamente` };
     } catch (error) {
