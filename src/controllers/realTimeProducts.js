@@ -8,7 +8,7 @@ export const getRealTimeProducts = async (req = request, res = response) => {
     const listProducts = [];
 
     res.render("realTimeProducts", {
-      title: "Stock de Productos en timepo real!",
+      title: "Stock de Productos con Websocket",
       listProducts,
     });
   } catch (error) {

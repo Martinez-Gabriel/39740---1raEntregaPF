@@ -2,9 +2,9 @@ import { Router } from "express";
 import { getHome } from "../controllers/home.js";
 import { getRealTimeProducts } from "../controllers/realTimeProducts.js";
 
-const HomeRouter = new Router();
+const ViewRouter = new Router();
 
-HomeRouter.get("/", getHome);
-HomeRouter.get("/realtimeproducts", getRealTimeProducts);
+ViewRouter.get("/", getHome);
+ViewRouter.get("/realtimeproducts", getRealTimeProducts);
 
-export default HomeRouter;
+export default ViewRouter;

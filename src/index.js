@@ -1,16 +1,16 @@
 import express from "express";
 import productRouter from "./routes/productRouter.js";
 import CartRouter from "./routes/cartRouter.js";
-import HomeRouter from "./routes/homeRouter.js";
+import ViewRouter from "./routes/viewRouter.js";
 import { engine } from "express-handlebars";
 import { resolve } from "path";
 import { Server } from "socket.io";
 import ProductManager from "./controllers/productManager.js";
 
-const pm = new ProductManager();
+const productManager = new ProductManager();
 
 async function traer() {
-  return await pm.getProducts();
+  return await productManager.getProducts();
 }
 
 void (async () => {
@@ -19,14 +19,16 @@ void (async () => {
 
     const app = express();
 
-    //MIDDLEWARE REQ.QUERY
+    //MIDDLEWARE REQ.QUERY.
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
+    //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
     app.use("/api/carts", CartRouter);
-    app.use("/api/", HomeRouter);
+    app.use("/api/", ViewRouter);
 
+    //IMPORTANDO HANDLEBARS.
     const viewsPath = resolve("./views");
 
     app.engine(
@@ -39,11 +41,12 @@ void (async () => {
     app.set("view engine", "handlebars");
     app.set("views", viewsPath);
 
-    //CONFIGURACION DE PUERTO
+    //CONFIGURACION DE PUERTO.
     const httpServer = app.listen(SERVER_PORT, () => {
       console.log(`Server listening on port: localhost:${SERVER_PORT}`);
     });
 
+    //CONFIGURACION DE SOCKET.
     const socketServer = new Server(httpServer);
 
     socketServer.on("connection", (socket) => {
