@@ -29,7 +29,7 @@ void (async () => {
     app.use("/api/", ViewRouter);
 
     //IMPORTANDO HANDLEBARS.
-    const viewsPath = resolve("./views");
+    const viewsPath = resolve("./src/views");
 
     app.engine(
       "handlebars",
