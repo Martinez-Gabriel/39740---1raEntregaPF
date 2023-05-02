@@ -1,21 +1,19 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
-import productRouter from "./routes/productRouter.js";
-import CartRouter from "./routes/cartRouter.js";
-import ViewRouter from "./routes/viewRouter.js";
-import { engine } from "express-handlebars";
-import { resolve } from "path";
-import { Server } from "socket.io";
-import ProductManager from "./controllers/productManager.js";
-
-const productManager = new ProductManager();
-
-async function traer() {
-  return await productManager.getProducts();
-}
+import productRouter from "./mongoose/routes/productRouter.js";
+import mongoose from "mongoose";
+import productsSchema from "./mongoose/models/productsSchema.js";
 
 void (async () => {
   try {
     const SERVER_PORT = 8080;
+
+    await mongoose.connect(process.env.MONGO_DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
     const app = express();
 
@@ -25,37 +23,12 @@ void (async () => {
 
     //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
-    app.use("/api/carts", CartRouter);
-    app.use("/api/", ViewRouter);
-
-    //IMPORTANDO HANDLEBARS.
-    const viewsPath = resolve("./src/views");
-
-    app.engine(
-      "handlebars",
-      engine({
-        layoutsDir: `${viewsPath}/layouts`,
-        defaultLayout: `${viewsPath}/layouts/main.handlebars`,
-      })
-    );
-    app.set("view engine", "handlebars");
-    app.set("views", viewsPath);
+    // app.use("/api/carts", CartRouter);
+    // app.use("/api/", ViewRouter);
 
     //CONFIGURACION DE PUERTO.
     const httpServer = app.listen(SERVER_PORT, () => {
       console.log(`Server listening on port: localhost:${SERVER_PORT}`);
-    });
-
-    //CONFIGURACION DE SOCKET.
-    const socketServer = new Server(httpServer);
-
-    socketServer.on("connection", (socket) => {
-      console.log("Cliente conectado");
-
-      socket.on("lista", async (data) => {
-        data = await traer();
-        socket.emit("listaActualizada", data);
-      });
     });
   } catch (e) {
     console.log("Error: ");
