@@ -22,16 +22,16 @@ class ProductMongoose {
     const product = await ProductsSchema.findOne({ _id: id });
 
     return {
-      id: document._id,
-      Title: document.Title,
-      Description: document.Description,
-      Code: document.Code,
-      Price: document.Price,
-      Status: document.Status,
-      Stock: document.Stock,
-      Category: document.Category,
-      Thumbnail: document.Thumbnail,
-      Status: document.Status,
+      id: product._id,
+      Title: product.Title,
+      Description: product.Description,
+      Code: product.Code,
+      Price: product.Price,
+      Status: product.Status,
+      Stock: product.Stock,
+      Category: product.Category,
+      Thumbnail: product.Thumbnail,
+      Status: product.Status,
     };
   }
 
@@ -39,16 +39,16 @@ class ProductMongoose {
     const product = await ProductsSchema.create(data);
 
     return {
-      id: document._id,
-      Title: document.Title,
-      Description: document.Description,
-      Code: document.Code,
-      Price: document.Price,
-      Status: document.Status,
-      Stock: document.Stock,
-      Category: document.Category,
-      Thumbnail: document.Thumbnail,
-      Status: document.Status,
+      id: product._id,
+      Title: product.Title,
+      Description: product.Description,
+      Code: product.Code,
+      Price: product.Price,
+      Status: product.Status,
+      Stock: product.Stock,
+      Category: product.Category,
+      Thumbnail: product.Thumbnail,
+      Status: product.Status,
     };
   }
 
