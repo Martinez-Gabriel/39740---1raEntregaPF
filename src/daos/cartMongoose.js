@@ -6,8 +6,8 @@ class CartMongoose {
 
     return carts.map((document) => ({
       id: document._id,
-      Products: document.Products,
-      Enable: document.Enable,
+      products: document.Products,
+      enable: document.Enable,
     }));
   }
 
@@ -16,8 +16,8 @@ class CartMongoose {
 
     return {
         id: cart._id,
-        Products: cart.Products,
-        Enable: cart.Enable,
+        products: cart.Products,
+        enable: cart.Enable,
     };
   }
 
@@ -26,8 +26,8 @@ class CartMongoose {
 
     return {
         id: cart._id,
-        Products: cart.Products,
-        Enable: cart.Enable,
+        products: cart.Products,
+        enable: cart.Enable,
     };
   }
 
@@ -38,8 +38,8 @@ class CartMongoose {
 
     return {
         id: cart._id,
-        Products: cart.Products,
-        Enable: cart.Enable,
+        products: cart.Products,
+        enable: cart.Enable,
     };
   }
 
