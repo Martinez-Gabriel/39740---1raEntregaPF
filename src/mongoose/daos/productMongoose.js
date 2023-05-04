@@ -1,4 +1,4 @@
-import ProductsSchema from "../models/productsSchema.js";
+import ProductsSchema from "../models/productSchema.js";
 
 class ProductMongoose {
   async find() {

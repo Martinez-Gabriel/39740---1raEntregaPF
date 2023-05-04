@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const productList = 'products';
+const productCollection = 'products';
 
 const ProductSchema = new Schema({
   Title: { type: Schema.Types.String, index: true, require: true },
@@ -11,8 +11,8 @@ const ProductSchema = new Schema({
   Stock: { type: Schema.Types.Number, require: true },
   Category: { type: Schema.Types.String, require: true },
   Thumbnail: { type: Schema.Types.String, require: true },
-  Status: { type: Schema.Types.Boolean, require: true }
+  Enable: { type: Schema.Types.Boolean, require: true }
 });
 
-export default mongoose.model(productList, ProductSchema);
+export default mongoose.model(productCollection, ProductSchema);
 
