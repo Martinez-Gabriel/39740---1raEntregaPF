@@ -1,8 +1,8 @@
-import ProductsSchema from "../models/productSchema.js";
+import ProductSchema from "../models/productSchema.js";
 
 class ProductMongoose {
   async find() {
-    const products = await ProductsSchema.find();
+    const products = await ProductSchema.find();
 
     return products.map((document) => ({
       id: document._id,
@@ -14,7 +14,7 @@ class ProductMongoose {
       Stock: document.Stock,
       Category: document.Category,
       Thumbnail: document.Thumbnail,
-      Status: document.Status,
+      Enable: document.Enable,
     }));
   }
 
@@ -31,7 +31,7 @@ class ProductMongoose {
       Stock: product.Stock,
       Category: product.Category,
       Thumbnail: product.Thumbnail,
-      Status: product.Status,
+      Enable: product.Enable,
     };
   }
 
@@ -48,7 +48,7 @@ class ProductMongoose {
       Stock: product.Stock,
       Category: product.Category,
       Thumbnail: product.Thumbnail,
-      Status: product.Status,
+      Enable: product.Enable,
     };
   }
 
@@ -67,7 +67,7 @@ class ProductMongoose {
       Stock: document.Stock,
       Category: document.Category,
       Thumbnail: document.Thumbnail,
-      Status: document.Status,
+      Enable: document.Enable,
     };
   }
 
