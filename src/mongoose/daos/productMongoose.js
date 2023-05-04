@@ -1,8 +1,8 @@
-import ProductSchema from "../models/productSchema.js";
+import productSchema from "../models/productSchema.js";
 
 class ProductMongoose {
   async find() {
-    const products = await ProductSchema.find();
+    const products = await productSchema.find();
 
     return products.map((document) => ({
       id: document._id,
@@ -19,7 +19,7 @@ class ProductMongoose {
   }
 
   async getOne(id) {
-    const product = await ProductsSchema.findOne({ _id: id });
+    const product = await productSchema.findOne({ _id: id });
 
     return {
       id: product._id,
@@ -36,7 +36,7 @@ class ProductMongoose {
   }
 
   async create(data) {
-    const product = await ProductsSchema.create(data);
+    const product = await productSchema.create(data);
 
     return {
       id: product._id,
@@ -53,26 +53,26 @@ class ProductMongoose {
   }
 
   async updateOne(id, data) {
-    const product = await ProductsSchema.findOneAndUpdate({ _id: id }, data, {
+    const product = await productSchema.findOneAndUpdate({ _id: id }, data, {
       new: true,
     });
 
     return {
-      id: document._id,
-      Title: document.Title,
-      Description: document.Description,
-      Code: document.Code,
-      Price: document.Price,
-      Status: document.Status,
-      Stock: document.Stock,
-      Category: document.Category,
-      Thumbnail: document.Thumbnail,
-      Enable: document.Enable,
+      id: product._id,
+      Title: product.Title,
+      Description: product.Description,
+      Code: product.Code,
+      Price: product.Price,
+      Status: product.Status,
+      Stock: product.Stock,
+      Category: product.Category,
+      Thumbnail: product.Thumbnail,
+      Enable: product.Enable,
     };
   }
 
   async deleteOne(id) {
-    return ProductsSchema.deleteOne({ _id: id });
+    return productSchema.deleteOne({ _id: id });
   }
 }
 
