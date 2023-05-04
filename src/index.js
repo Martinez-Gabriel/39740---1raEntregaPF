@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
-import productRouter from "./mongoose/routes/productRouter.js";
-import cartRouter from "./mongoose/routes/cartRouter.js";
+import productRouter from "./routes/productRouter.js";
+import cartRouter from "./routes/cartRouter.js";
 import mongoose from "mongoose";
 import productsSchema from "./mongoose/models/productsSchema.js";
 
