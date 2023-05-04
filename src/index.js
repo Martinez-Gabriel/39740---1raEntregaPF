@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import productRouter from "./mongoose/routes/productRouter.js";
+import cartRouter from "./mongoose/routes/cartRouter.js";
 import mongoose from "mongoose";
 import productsSchema from "./mongoose/models/productsSchema.js";
 
@@ -23,15 +24,14 @@ void (async () => {
 
     //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
-    // app.use("/api/carts", CartRouter);
-    // app.use("/api/", ViewRouter);
+    app.use("/api/carts", cartRouter);
 
     //CONFIGURACION DE PUERTO.
     const httpServer = app.listen(SERVER_PORT, () => {
-      console.log(`Server listening on port: localhost:${SERVER_PORT}`);
+      console.log(`ON: Server listening on port: localhost:${SERVER_PORT}`);
     });
   } catch (e) {
-    console.log("Error: ");
+    console.log("Error: can't connected to data base");
     console.log(e);
   }
 })();
