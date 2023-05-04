@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const cartCollection = 'carts';
+const cartCollection = "carts";
 
 const CartSchema = new Schema({
   products: [
@@ -13,4 +13,3 @@ const CartSchema = new Schema({
 });
 
 export default mongoose.model(cartCollection, CartSchema);
-

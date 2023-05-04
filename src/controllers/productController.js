@@ -1,53 +1,47 @@
 import ProductManager from "../managers/productManager.js";
 
-class ProductController
-{
-  static list = async  (req, res) =>
-  {
-      const manager = new ProductManager();
+class ProductController {
+  static list = async (req, res) => {
+    const manager = new ProductManager();
 
-      const products = await manager.find();
-      res.send({ status: 'success', products });
+    const products = await manager.find();
+    res.send({ status: "success", products });
   };
 }
 
-export const getOne = async (req, res) =>
-{
-    const { id } = req.params;
+export const getOne = async (req, res) => {
+  const { id } = req.params;
 
-    const manager = new ProductManager();
+  const manager = new ProductManager();
 
-    const product = await manager.getOne(id);
-    res.send({ status: 'success', product: product });
+  const product = await manager.getOne(id);
+  res.send({ status: "success", product: product });
 };
 
-export const save = async (req, res) =>
-{
+export const save = async (req, res) => {
   const manager = new ProductManager();
   const product = await manager.create(req.body);
 
-  res.send({ status: 'success', product, message: 'Product created.' })
+  res.send({ status: "success", product, message: "Product created." });
 };
 
-export const update = async (req, res) =>
-{
+export const update = async (req, res) => {
   const { id } = req.params;
 
   const manager = new ProductManager();
 
   const result = await manager.updateOne(id, req.body);
 
-  res.send({ status: 'success', result, message: 'Product updated.' })
+  res.send({ status: "success", result, message: "Product updated." });
 };
 
-export const deleteOne = async (req, res) =>
-{
+export const deleteOne = async (req, res) => {
   const { id } = req.params;
 
   const manager = new ProductManager();
 
   const product = await manager.deleteOne(id);
-  res.send({ status: 'success', message: 'Product deleted.' })
+  res.send({ status: "success", message: "Product deleted." });
 };
 
 export default ProductController;
