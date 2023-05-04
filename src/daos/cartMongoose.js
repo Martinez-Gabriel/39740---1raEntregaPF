@@ -5,9 +5,13 @@ class CartMongoose {
     const carts = await CartSchema.find();
 
     return carts.map((document) => ({
-      id: document._id,
-      products: document.Products,
-      enable: document.Enable,
+      products: [
+        {
+          id: document._id,
+          quantity: document._quantity,
+        },
+      ],
+      enable: document.enable,
     }));
   }
 
@@ -15,9 +19,13 @@ class CartMongoose {
     const cart = await CartSchema.findOne({ _id: id });
 
     return {
-        id: cart._id,
-        products: cart.Products,
-        enable: cart.Enable,
+      products: [
+        {
+          id: cart._id,
+          quantity: cart._quantity,
+        },
+      ],
+      enable: cart.enable,
     };
   }
 
@@ -25,9 +33,13 @@ class CartMongoose {
     const cart = await CartSchema.create(data);
 
     return {
-        id: cart._id,
-        products: cart.Products,
-        enable: cart.Enable,
+      products: [
+        {
+          id: cart._id,
+          quantity: cart._quantity,
+        },
+      ],
+      enable: cart.enable,
     };
   }
 
@@ -37,9 +49,13 @@ class CartMongoose {
     });
 
     return {
-        id: cart._id,
-        products: cart.Products,
-        enable: cart.Enable,
+      products: [
+        {
+          id: cart._id,
+          quantity: cart._quantity,
+        },
+      ],
+      enable: cart.enable,
     };
   }
 
