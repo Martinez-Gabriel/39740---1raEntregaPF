@@ -6,15 +6,15 @@ class ProductMongoose {
 
     return products.map((document) => ({
       id: document._id,
-      title: document.Title,
-      description: document.Description,
-      code: document.Code,
-      price: document.Price,
-      status: document.Status,
-      stock: document.Stock,
-      category: document.Category,
-      thumbnail: document.Thumbnail,
-      enable: document.Enable,
+      title: document.title,
+      description: document.description,
+      code: document.code,
+      price: document.price,
+      status: document.status,
+      stock: document.stock,
+      category: document.category,
+      thumbnail: document.thumbnail,
+      enable: document.enable,
     }));
   }
 
@@ -23,15 +23,15 @@ class ProductMongoose {
 
     return {
       id: product._id,
-      title: product.Title,
-      description: product.Description,
-      code: product.Code,
-      price: product.Price,
-      status: product.Status,
-      stock: product.Stock,
-      category: product.Category,
-      thumbnail: product.Thumbnail,
-      enable: product.Enable,
+      title: product.title,
+      description: product.description,
+      code: product.code,
+      price: product.price,
+      status: product.status,
+      stock: product.stock,
+      category: product.category,
+      thumbnail: product.thumbnail,
+      enable: product.enable,
     };
   }
 
@@ -40,15 +40,15 @@ class ProductMongoose {
 
     return {
       id: product._id,
-      title: product.Title,
-      description: product.Description,
-      code: product.Code,
-      price: product.Price,
-      status: product.Status,
-      stock: product.Stock,
-      category: product.Category,
-      thumbnail: product.Thumbnail,
-      enable: product.Enable,
+      title: product.title,
+      description: product.description,
+      code: product.code,
+      price: product.price,
+      status: product.status,
+      stock: product.stock,
+      category: product.category,
+      thumbnail: product.thumbnail,
+      enable: product.enable,
     };
   }
 
@@ -59,15 +59,15 @@ class ProductMongoose {
 
     return {
       id: product._id,
-      title: product.Title,
-      description: product.Description,
-      code: product.Code,
-      price: product.Price,
-      status: product.Status,
-      stock: product.Stock,
-      category: product.Category,
-      thumbnail: product.Thumbnail,
-      enable: product.Enable,
+      title: product.title,
+      description: product.description,
+      code: product.code,
+      price: product.price,
+      status: product.status,
+      stock: product.stock,
+      category: product.category,
+      thumbnail: product.thumbnail,
+      enable: product.enable,
     };
   }
 

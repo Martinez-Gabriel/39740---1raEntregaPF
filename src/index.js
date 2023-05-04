@@ -5,7 +5,7 @@ import express from "express";
 import productRouter from "./routes/productRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import mongoose from "mongoose";
-import productsSchema from "./mongoose/models/productsSchema.js";
+import productSchema from "./models/productSchema.js";
 
 void (async () => {
   try {
