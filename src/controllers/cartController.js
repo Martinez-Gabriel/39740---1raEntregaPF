@@ -9,39 +9,79 @@ class CartController {
   };
 }
 
+export const create = async (req, res) => {
+  try {
+    const manager = new CartManager()
+    const cart = await manager.create()
+    res.status(201).send({ status: 'success', payload: cart })
+  } catch (error) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
+
+export const addProduct = async (req, res) => {
+  try {
+    const { cid, pid } = req.params
+    const manager = new CartManager()
+    const cart = await manager.addProduct(cid, pid)
+    res.status(201).send({ status: 'success', payload: cart })
+  } catch (error) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
+
 export const getOne = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { cid } = req.params
+    const manager = new CartManager()
+    const cart = await manager.get(cid)
+    res.send({ status: 'success', payload: cart })
+  } catch (error) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
 
-  const manager = new CartManager();
+export const updateProductQuantity = async (req, res) => {
+  try {
+    const { cid, pid } = req.params
+    const { quantity } = req.body
+    const manager = new CartManager()
+    const updatedCart = await manager.updateProductQuantity(
+      cid,
+      pid,
+      quantity
+    )
+    if (!updatedCart)
+      return res
+        .status(404)
+        .send({ status: 'error', message: 'Cart or product not found' })
 
-  const cart = await manager.getOne(id);
-  res.send({ status: "success", cart: cart });
-};
+    res.status(200).send({ status: 'success', payload: updatedCart })
+  } catch (error) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
 
-export const save = async (req, res) => {
-  const manager = new CartManager();
-  const cart = await manager.create(req.body);
+export const deleteOneProduct = async (req, res) => {
+  try {
+    const { cid, pid } = req.params
+    const manager = new CartManager()
+    await manager.deleteOneProduct(cid, pid)
+    res.status(200).send({ status: 'success' })
+  } catch (errordeleteOne) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
 
-  res.send({ status: "success", cart, message: "Cart created." });
-};
-
-export const update = async (req, res) => {
-  const { id } = req.params;
-
-  const manager = new CartManager();
-
-  const result = await manager.updateOne(id, req.body);
-
-  res.send({ status: "success", result, message: "Cart updated." });
-};
-
-export const deleteOne = async (req, res) => {
-  const { id } = req.params;
-
-  const manager = new CartManager();
-
-  const cart = await manager.deleteOne(id);
-  res.send({ status: "success", message: "Cart deleted." });
-};
+export const deleteAllProducts = async (req, res) => {
+  try {
+    const { cid } = req.params
+    const manager = new CartManager()
+    const cart = await manager.deleteAllProducts(cid)
+    res.send({ status: 'success', payload: cart })
+  } catch (error) {
+    res.status(500).send({ status: 'error', message: error.message })
+  }
+}
 
 export default CartController;

@@ -3,13 +3,19 @@ import mongoose, { Schema } from "mongoose";
 const cartCollection = "carts";
 
 const CartSchema = new Schema({
-  products: [
-    {
-      id: { type: Schema.Types.Number, require: true },
-      quantity: { type: Schema.Types.Number, require: true },
-    },
-  ],
-  enable: { type: Schema.Types.Boolean, require: true },
+  products: {
+    type: [
+      {
+        _id: {
+          type: Schema.Types.ObjectId
+        },
+        quantity: {
+          type: Number
+        }
+      }
+    ],
+    default: []
+  }
 });
 
 export default mongoose.model(cartCollection, CartSchema);

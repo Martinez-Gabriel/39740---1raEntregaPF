@@ -1,6 +1,6 @@
 import productSchema from "../models/productModel.js";
 
-class ProductMongoose {
+class ProductDao {
   async find() {
     const products = await productSchema.find();
 
@@ -76,4 +76,4 @@ class ProductMongoose {
   }
 }
 
-export default ProductMongoose;
+export default ProductDao;

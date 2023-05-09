@@ -1,28 +1,36 @@
-import CartMongoose from "../daos/cartDao.js";
+import CartDao from "../daos/cartDao.js";
 
 class CartManager {
   constructor() {
-    this.cartDao = new CartMongoose();
+    this.cartDao = new CartDao();
   }
 
   async find() {
     return this.cartDao.find();
   }
 
-  async getOne(id) {
-    return this.cartDao.getOne(id);
+  async create() {
+    return this.cartDao.create()
   }
 
-  async create(data) {
-    return this.cartDao.create(data);
+  async addProduct(cid, pid) {
+    return this.cartDao.addProduct(cid, pid)
   }
 
-  async updateOne(id, data) {
-    return this.cartDao.updateOne(id, data);
+  async getOne(cid) {
+    return this.cartDao.getOne(cid);
   }
 
-  async deleteOne(id) {
-    return this.cartDao.deleteOne(id);
+  async updateProductQuantity(cid, pid, quantity) {
+    return this.cartDao.updateProductQuantity(cid, pid, quantity)
+  }
+
+  async deleteOneProduct(cid, pid) {
+    return this.cartDao.deleteOneProduct(cid, pid)
+  }
+
+  async deleteAllProducts(cid) {
+    return this.cartDao.deleteAllProducts(cid)
   }
 }
 
