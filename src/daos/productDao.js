@@ -18,6 +18,8 @@ class ProductDao {
     }));
   }
 
+
+  
   async getOne(id) {
     const product = await productSchema.findOne({ _id: id });
 

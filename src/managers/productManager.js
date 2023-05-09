@@ -13,6 +13,8 @@ class ProductManager {
     return this.productDao.getOne(id);
   }
 
+
+  
   async create(data) {
     return this.productDao.create(data);
   }

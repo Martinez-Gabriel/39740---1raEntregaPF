@@ -25,6 +25,8 @@ class CartManager {
     return this.cartDao.updateProductQuantity(cid, pid, quantity)
   }
 
+
+  
   async deleteOneProduct(cid, pid) {
     return this.cartDao.deleteOneProduct(cid, pid)
   }
