@@ -7,17 +7,15 @@ const CartSchema = new Schema({
     type: [
       {
         _id: {
-          type: Schema.Types.ObjectId
+          type: Schema.Types.ObjectId,
         },
         quantity: {
-          type: Number
-        }
-      }
+          type: Number,
+        },
+      },
     ],
-    default: []
-  }
+    default: [],
+  },
 });
-
-
 
 export default mongoose.model(cartCollection, CartSchema);

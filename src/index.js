@@ -10,8 +10,6 @@ void (async () => {
   try {
     const SERVER_PORT = 8080;
 
-
-    
     await mongoose.connect(process.env.MONGO_DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

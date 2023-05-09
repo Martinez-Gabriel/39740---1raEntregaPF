@@ -14,7 +14,4 @@ const ProductSchema = new Schema({
   enable: { type: Schema.Types.Boolean, require: true },
 });
 
-
-
 export default mongoose.model(productCollection, ProductSchema);
-

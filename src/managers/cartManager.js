@@ -10,11 +10,11 @@ class CartManager {
   }
 
   async create() {
-    return this.cartDao.create()
+    return this.cartDao.create();
   }
 
   async addProduct(cid, pid) {
-    return this.cartDao.addProduct(cid, pid)
+    return this.cartDao.addProduct(cid, pid);
   }
 
   async getOne(cid) {
@@ -22,17 +22,15 @@ class CartManager {
   }
 
   async updateProductQuantity(cid, pid, quantity) {
-    return this.cartDao.updateProductQuantity(cid, pid, quantity)
+    return this.cartDao.updateProductQuantity(cid, pid, quantity);
   }
 
-
-  
   async deleteOneProduct(cid, pid) {
-    return this.cartDao.deleteOneProduct(cid, pid)
+    return this.cartDao.deleteOneProduct(cid, pid);
   }
 
   async deleteAllProducts(cid) {
-    return this.cartDao.deleteAllProducts(cid)
+    return this.cartDao.deleteAllProducts(cid);
   }
 }
 
