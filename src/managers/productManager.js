@@ -5,8 +5,8 @@ class ProductManager {
     this.productDao = new ProductMongoose();
   }
 
-  async find() {
-    return this.productDao.find();
+  async findPaginate(category, limit, page) {
+    return this.productDao.findPaginate(category, limit, page);
   }
 
   async getOne(id) {

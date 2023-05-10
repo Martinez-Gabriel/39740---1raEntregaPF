@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProductController, {
   deleteOne,
+  getAll,
   getOne,
   save,
   update,
@@ -8,7 +9,7 @@ import ProductController, {
 
 const productRouter = Router();
 
-productRouter.get("/", ProductController.list);
+productRouter.get("/?category=?limit=?page=1", getAll);
 productRouter.get("/:id", getOne);
 productRouter.post("/", save);
 productRouter.put("/:id", update);

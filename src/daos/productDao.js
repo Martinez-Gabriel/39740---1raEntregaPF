@@ -1,8 +1,14 @@
-import productSchema from "../models/productModel.js";
+import productModel from "../models/productModel.js";
 
 class ProductDao {
-  async find() {
-    const products = await productSchema.find();
+  async findPaginate(category, limit, page) {
+    if (category) {
+      return productModel.aggregate([{ $match: { category: category } }]);
+    }
+    if (!limit || limit <= 0) {
+      return productModel.paginate({}, { limit: limit, page: page});
+    }
+    const products = await productModel.findPaginate();
 
     return products.map((document) => ({
       id: document._id,
@@ -19,7 +25,7 @@ class ProductDao {
   }
 
   async getOne(id) {
-    const product = await productSchema.findOne({ _id: id });
+    const product = await productModel.findOne({ _id: id });
 
     return {
       id: product._id,
@@ -36,7 +42,7 @@ class ProductDao {
   }
 
   async create(data) {
-    const product = await productSchema.create(data);
+    const product = await productModel.create(data);
 
     return {
       id: product._id,
@@ -53,7 +59,7 @@ class ProductDao {
   }
 
   async updateOne(id, data) {
-    const product = await productSchema.findOneAndUpdate({ _id: id }, data, {
+    const product = await productModel.findOneAndUpdate({ _id: id }, data, {
       new: true,
     });
 
@@ -72,8 +78,11 @@ class ProductDao {
   }
 
   async deleteOne(id) {
-    return productSchema.deleteOne({ _id: id });
+    return productModel.deleteOne({ _id: id });
   }
+
+  
 }
+
 
 export default ProductDao;
