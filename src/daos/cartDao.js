@@ -1,8 +1,8 @@
-import CartSchema from "../models/cartModel.js";
+import CartModel from "../models/cartModel.js";
 
 class CartDao {
   async find() {
-    const carts = await CartSchema.find();
+    const carts = await CartModel.find();
 
     return carts.map((document) => ({
       products: [
@@ -16,7 +16,7 @@ class CartDao {
   }
 
   async create() {
-    return CartSchema.create({ products: [] });
+    return CartModel.create({ products: [] });
   }
 
   async addProduct(cid, pid) {
@@ -38,11 +38,11 @@ class CartDao {
   }
 
   async getOne(cid) {
-    return CartSchema.findById({ _id: cid });
+    return CartModel.findById({ _id: cid });
   }
 
   updateProductQuantity(cid, pid, quantity) {
-    return CartSchema.findOneAndUpdate(
+    return CartModel.findOneAndUpdate(
       { _id: cid, "products._id": pid },
       { $set: { "products.$.quantity": quantity } },
       { new: true }
@@ -50,7 +50,7 @@ class CartDao {
   }
 
   async deleteOneProduct(cid, pid) {
-    return CartSchema.findByIdAndUpdate(
+    return CartModel.findByIdAndUpdate(
       cid,
       { $pull: { products: { _id: pid } } },
       { new: true }
@@ -58,7 +58,7 @@ class CartDao {
   }
 
   deleteAllProducts(cid) {
-    return CartSchema.findByIdAndUpdate(
+    return CartModel.findByIdAndUpdate(
       { _id: cid },
       { $set: { products: [] } },
       { new: true }

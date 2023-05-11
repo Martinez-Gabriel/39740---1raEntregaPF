@@ -1,6 +1,6 @@
 import CartManager from "../managers/cartManager.js";
 
-class CartController {
+  class CartController {
   static list = async (req, res) => {
     const manager = new CartManager();
 
