@@ -1,8 +1,8 @@
-import ProductMongoose from "../daos/productDao.js";
+import ProductDao from "../daos/productDao.js";
 
 class ProductManager {
   constructor() {
-    this.productDao = new ProductMongoose();
+    this.productDao = new ProductDao();
   }
 
   async findPaginate(category, limit, page) {

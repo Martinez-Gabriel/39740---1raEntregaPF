@@ -1,12 +1,14 @@
 import ProductManager from "../managers/productManager.js";
 
-  class ProductController {
-  static getAll = async (req, res) => {
+class ProductController
+{
+  static getAll = async (req, res) =>
+  {   
     let { category, limit, page } = req.query;
     const manager = new ProductManager();
     const products = await manager.findPaginate(category, limit, page);
 
-    res.send({ status: "success", payload: products });
+      res.send({ status: 'success', products });
   };
 }
 
