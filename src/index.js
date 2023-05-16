@@ -2,9 +2,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import session from "express-session";
+import mongoose from "mongoose";
+import mongoStore from "connect-mongo";
+import cookieParser from "cookie-parser";
+
 import productRouter from "./routes/productRouter.js";
 import cartRouter from "./routes/cartRouter.js";
-import mongoose from "mongoose";
+import userRouter from "./routes/userRouter.js";
+import sessionRouter from "./routes/sessionRouter.js";
 
 void (async () => {
   try {
@@ -20,10 +26,23 @@ void (async () => {
     //MIDDLEWARE REQ.QUERY.
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+    app.use(cookieParser());
+    app.use(session({
+      store: mongoStore.create({
+        mongoUrl: process.env.MONGO_DB_URI,
+        ttl: 10
+      }),
+      secret: 'CoderS3cR3tC0D3',
+      resave: false,
+      saveUninitialized: false
+    }));
 
     //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
     app.use("/api/carts", cartRouter);
+    app.use("/api/sessions", sessionRouter);
+    app.use("/api/users", userRouter);
+    
 
     //CONFIGURACION DE PUERTO.
     const httpServer = app.listen(SERVER_PORT, () => {
