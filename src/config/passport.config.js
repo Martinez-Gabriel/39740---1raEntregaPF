@@ -1,34 +1,25 @@
-import dotenv from "dotenv";
-dotenv.config();
 import passport from 'passport';
-import GithubStrategy from 'passport-github2';
-
+import local from 'passport-local';
 import UserManager from "../managers/userManager.js";
+import {createHash, isValidPassword} from "../utils/index.js";
 
-const { GITHUB_CLIENT_ID, GITHUB_SECRET_ID, GITHUB_CALLBACK_URL } = process.env;
-const credentials = {
-  clientID: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_SECRET_ID,
-  callbackURL: GITHUB_CALLBACK_URL
-};
+const LocalStrategy = local.Strategy;
 
-const github = new GithubStrategy(credentials, async (accessToken, refreshToken, profile, done)=> {
+const register = new LocalStrategy({passReqToCallback: true, usernameField: 'email'}, async (req, username, password, done)=> {
     try
     {
-      console.log(profile);
       const manager = new UserManager();
-      let user = await manager.getOneByEmail(profile._json.email);
+      let user = await manager.getOneByEmail(req.body.email);
 
       if(user.id)
       {
-        return done(null, user)
+        console.log('User already exists.');
+        return done(null, false);
       }
+
       const dto = {
-          firstName: profile._json.name,
-          lastName: '',
-          age: 18,
-          email: profile._json.email,
-          password: ''
+        ...req.body,
+        password: await createHash(req.body.password)
       }
 
       let result = await manager.create(dto);
@@ -40,8 +31,30 @@ const github = new GithubStrategy(credentials, async (accessToken, refreshToken,
     }
 });
 
+const login2 = new LocalStrategy({usernameField: 'email'}, async (username, password, done)=> {
+    try
+    {
+      const manager = new UserManager();
+      let user = await manager.getOneByEmail(username);
+
+      if(!user.id)
+      {
+        console.log('User doesnt exist.');
+        return done(null, false);
+      }
+
+      if(!await isValidPassword(password, user.password)) return done (null, false);
+      return done(null, user);
+    }
+    catch (e)
+    {
+        done(e);
+    }
+});
+
 const initializePassport = () => {
-  passport.use('github', github);
+  passport.use('register', register);
+  passport.use('login2', login2);
 
   passport.serializeUser((user, done)=>
   {
