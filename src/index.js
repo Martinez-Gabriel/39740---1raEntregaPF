@@ -10,7 +10,12 @@ import cookieParser from "cookie-parser";
 import productRouter from "./routes/productRouter.js";
 import cartRouter from "./routes/cartRouter.js";
 import userRouter from "./routes/userRouter.js";
+import initializePassport from "./config/passport.config.js";
 import sessionRouter from "./routes/sessionRouter.js";
+
+import passport from "passport";
+import { engine } from 'express-handlebars';
+import { resolve } from 'path';
 
 void (async () => {
   try {
@@ -36,6 +41,27 @@ void (async () => {
       resave: false,
       saveUninitialized: false
     }));
+
+    //PASSPORT  Y HANDLEBARS
+    const viewsPath = resolve('src/views');
+    app.engine('handlebars', engine({
+      layoutsDir: `${viewsPath}/layouts`,
+      defaultLayout: `${viewsPath}/layouts/main.handlebars`,
+    }));
+    app.set('view engine', 'handlebars');
+    app.set('views', viewsPath);
+
+    initializePassport();
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.get('/', (req, res)=> {
+      res.render('home');
+    });
+
+    app.get('/login', (req, res)=>{
+      res.render('login');
+    });
 
     //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
