@@ -21,7 +21,7 @@ export const login = async (req, res, next) => {
 
     const accessToken = await generateToken(user);
 
-    res.send({ accessToken, message: "Login success!" });
+    res.status(200).send({ accessToken, message: "Login success!" });
   } catch (e) {
     next(e);
   }
