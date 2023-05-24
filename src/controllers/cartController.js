@@ -1,6 +1,6 @@
 import CartManager from "../managers/cartManager.js";
 
-  class CartController {
+class CartController {
   static list = async (req, res) => {
     const manager = new CartManager();
 
@@ -9,39 +9,39 @@ import CartManager from "../managers/cartManager.js";
   };
 }
 
-export const create = async (req, res) => {
+export const create = async (req, res, next) => {
   try {
     const manager = new CartManager();
     const cart = await manager.create();
     res.status(201).send({ status: "success", payload: cart });
-  } catch (error) {
-    res.status(500).send({ status: "error", message: error.message });
+  } catch (e) {
+    next(e);
   }
 };
 
-export const addProduct = async (req, res) => {
+export const addProduct = async (req, res, next) => {
   try {
     const { cid, pid } = req.params;
     const manager = new CartManager();
     const cart = await manager.addProduct(cid, pid);
     res.status(201).send({ status: "success", payload: cart });
   } catch (error) {
-    res.status(500).send({ status: "error", message: error.message });
+    next(e);
   }
 };
 
-export const getOne = async (req, res) => {
+export const getOne = async (req, res, next) => {
   try {
     const { cid } = req.params;
     const manager = new CartManager();
     const cart = await manager.get(cid);
-    res.send({ status: "success", payload: cart });
-  } catch (error) {
-    res.status(500).send({ status: "error", message: error.message });
+    res.status(200).send({ status: "success", payload: cart });
+  } catch (e) {
+    next(e);
   }
 };
 
-export const updateProductQuantity = async (req, res) => {
+export const updateProductQuantity = async (req, res, next) => {
   try {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
@@ -53,30 +53,30 @@ export const updateProductQuantity = async (req, res) => {
         .send({ status: "error", message: "Cart or product not found" });
 
     res.status(200).send({ status: "success", payload: updatedCart });
-  } catch (error) {
-    res.status(500).send({ status: "error", message: error.message });
+  } catch (e) {
+    next(e);
   }
 };
 
-export const deleteOneProduct = async (req, res) => {
+export const deleteOneProduct = async (req, res, next) => {
   try {
     const { cid, pid } = req.params;
     const manager = new CartManager();
     await manager.deleteOneProduct(cid, pid);
     res.status(200).send({ status: "success" });
-  } catch (errordeleteOne) {
-    res.status(500).send({ status: "error", message: error.message });
+  } catch (e) {
+    next(e);
   }
 };
 
-export const deleteAllProducts = async (req, res) => {
+export const deleteAllProducts = async (req, res, next) => {
   try {
     const { cid } = req.params;
     const manager = new CartManager();
     const cart = await manager.deleteAllProducts(cid);
-    res.send({ status: "success", payload: cart });
-  } catch (error) {
-    res.status(500).send({ status: "error", message: error.message });
+    res.status(200).send({ status: "success", payload: cart });
+  } catch (e) {
+    next(e);
   }
 };
 

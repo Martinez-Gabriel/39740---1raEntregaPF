@@ -16,6 +16,7 @@ import sessionRouter from "./routes/sessionRouter.js";
 import passport from "passport";
 import { engine } from 'express-handlebars';
 import { resolve } from 'path';
+import errorHandler from "./middlewares/errorHandler.js";
 
 void (async () => {
   try {
@@ -68,6 +69,7 @@ void (async () => {
     app.use("/api/carts", cartRouter);
     app.use("/api/sessions", sessionRouter);
     app.use("/api/users", userRouter);
+    app.use(errorHandler);
     
 
     //CONFIGURACION DE PUERTO.
