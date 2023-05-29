@@ -1,4 +1,7 @@
 import UserManager from "../managers/userManager.js";
+import idValidation from "../validations/idValidation.js"
+import userSaveValidation from "../validations/UserValidation/userSaveValidation.js";
+import userUpdateValidation from "../validations/UserValidation/userUpdateValidation.js";
 
 export const list = async (req, res, next) => {
   try {
@@ -15,6 +18,8 @@ export const list = async (req, res, next) => {
 
 export const getOne = async (req, res, next) => {
   try {
+    await idValidation.parseAsync(req.params);
+
     const { id } = req.params;
 
     const manager = new UserManager();
@@ -28,6 +33,8 @@ export const getOne = async (req, res, next) => {
 
 export const save = async (req, res, next) => {
   try {
+    await userSaveValidation.parseAsync({...req.body});
+
     const manager = new UserManager();
     const user = await manager.create(req.body);
 
@@ -39,6 +46,8 @@ export const save = async (req, res, next) => {
 
 export const update = async (req, res, next) => {
   try {
+    await userUpdateValidation.parseAsync({ ...req.params, ...req.body});
+    
     const { id } = req.params;
 
     const manager = new UserManager();
@@ -52,6 +61,8 @@ export const update = async (req, res, next) => {
 
 export const deleteOne = async (req, res, next) => {
   try {
+    await idValidation.parseAsync(req.params);
+
     const { id } = req.params;
 
     const manager = new UserManager();
