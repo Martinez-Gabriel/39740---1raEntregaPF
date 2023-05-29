@@ -1,4 +1,7 @@
 import ProductManager from "../managers/productManager.js";
+import idValidation from "../validations/idValidation.js";
+import productSaveValidation from "../validations/ProductValidation/productSaveValidation.js";
+import productUpdateValidation from "../validations/ProductValidation/productUpdateValidation.js"
 
 class ProductController {
   static getAll = async (req, res, next) => {
@@ -16,6 +19,8 @@ class ProductController {
 
 export const getOne = async (req, res, next) => {
   try {
+    await idValidation.parseAsync(req.params);
+
     const { id } = req.params;
     const manager = new ProductManager();
     const product = await manager.getOne(id);
@@ -27,6 +32,8 @@ export const getOne = async (req, res, next) => {
 
 export const save = async (req, res, next) => {
   try {
+    await productSaveValidation.parseAsync({...req.body});
+
     const manager = new ProductManager();
     const product = await manager.create(req.body);
 
@@ -40,6 +47,8 @@ export const save = async (req, res, next) => {
 
 export const update = async (req, res, next) => {
   try {
+    await productUpdateValidation.parseAsync({ ...req.params, ...req.body});
+
     const { id } = req.params;
 
     const manager = new ProductManager();
@@ -56,6 +65,8 @@ export const update = async (req, res, next) => {
 
 export const deleteOne = async (req, res, next) => {
   try {
+    await idValidation.parseAsync(req.params);
+
     const { id } = req.params;
 
     const manager = new ProductManager();
