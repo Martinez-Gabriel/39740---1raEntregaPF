@@ -1,12 +1,16 @@
 import ProductManager from "../managers/productManager.js";
 
 class ProductController {
-  static getAll = async (req, res) => {
-    let { category, limit, page } = req.query;
-    const manager = new ProductManager();
-    const products = await manager.findPaginate(category, limit, page);
-
-    res.send({ status: "success", products });
+  static getAll = async (req, res, next) => {
+    try {
+      let { category, limit, page } = req.query;
+      const manager = new ProductManager();
+      const products = await manager.findPaginate(category, limit, page);
+  
+      res.send({ status: "success", products });
+    } catch(e) {
+      next(e);
+    }
   };
 }
 

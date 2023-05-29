@@ -1,11 +1,15 @@
 import CartManager from "../managers/cartManager.js";
 
 class CartController {
-  static list = async (req, res) => {
-    const manager = new CartManager();
+  static list = async (req, res, next) => {
+    try {
+      const manager = new CartManager();
 
-    const carts = await manager.find();
-    res.send({ status: "success", carts });
+      const carts = await manager.find();
+      res.send({ status: "success", carts });
+    } catch (e) {
+      next(e);
+    }
   };
 }
 
