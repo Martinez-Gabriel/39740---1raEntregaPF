@@ -12,6 +12,7 @@ import sessionRouter from "../../routes/sessionRouter.js";
 import errorHandler from "../../middlewares/errorHandler.js";
 
 class AppExpress {
+
   init() {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -40,6 +41,7 @@ class AppExpress {
 
   listen() {
     //CONFIGURACION DE PUERTO.
+    const SERVER_PORT = 8080;
     const httpServer = app.listen(SERVER_PORT, () => {
       console.log(`ON: Server listening on port: localhost:${SERVER_PORT}`);
     });
