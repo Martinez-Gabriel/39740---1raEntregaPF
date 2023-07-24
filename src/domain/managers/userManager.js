@@ -1,4 +1,4 @@
-import UserDao from "../daos/userDao.js";
+import UserDao from "../../data/daos/userDao.js";
 
 class UserManager
 {

@@ -1,7 +1,7 @@
-import ProductManager from "../managers/productManager.js";
-import idValidation from "../validations/idValidation.js";
-import productSaveValidation from "../validations/ProductValidation/productSaveValidation.js";
-import productUpdateValidation from "../validations/ProductValidation/productUpdateValidation.js"
+import ProductManager from "../../domain/managers/productManager.js";
+import idValidation from "../../domain/validations/idValidation.js";
+import productSaveValidation from "../../domain/validations/ProductValidation/productSaveValidation.js";
+import productUpdateValidation from "../../domain/validations//ProductValidation/productUpdateValidation.js"
 
 class ProductController {
   static getAll = async (req, res, next) => {

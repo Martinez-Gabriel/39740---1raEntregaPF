@@ -4,12 +4,12 @@ import session from "express-session";
 import mongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 
-import productRouter from "../../routes/productRouter.js";
-import cartRouter from "../../routes/cartRouter.js";
-import userRouter from "../../routes/userRouter.js";
-import sessionRouter from "../../routes/sessionRouter.js";
+import productRouter from "../routes/productRouter.js";
+import cartRouter from "../routes/cartRouter.js";
+import userRouter from "../routes/userRouter.js";
+import sessionRouter from "../routes/sessionRouter.js";
 
-import errorHandler from "../../middlewares/errorHandler.js";
+import errorHandler from "../middlewares/errorHandler.js";
 
 class AppExpress {
 

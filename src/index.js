@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
-dotenv.config();
-
 import mongoose from "mongoose";
+import AppFactory from "./presentation/factories/appFactory.js"
 
-import AppFactory from "./presentation/factories/appFactory";
+dotenv.config();
 
 void (async () => {
   try {
