@@ -11,9 +11,12 @@ import sessionRouter from "../routes/sessionRouter.js";
 
 import errorHandler from "../middlewares/errorHandler.js";
 
+const app = express();
 class AppExpress {
+  
 
   init() {
+
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(cookieParser());
