@@ -53,3 +53,16 @@ export const signup = async (req, res, next) => {
     next(e);
   }
 };
+
+export const logout = async (req, res, next) => {
+  try{
+    req.session.destroy(err => {
+      if (err) {
+        return res.json({ status: 'Logout ERROR', body: err })
+      }
+    res.send('Logout OK!')
+    })
+  } catch (e) {
+    next(e);
+  }
+}

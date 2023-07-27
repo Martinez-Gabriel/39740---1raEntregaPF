@@ -26,7 +26,7 @@ class AppExpress {
           mongoUrl: process.env.MONGO_DB_URI,
           ttl: 10,
         }),
-        secret: "CoderS3cR3tC0D3",
+        secret: process.env.SECRET_COOKIE,
         resave: false,
         saveUninitialized: false,
       })
