@@ -8,6 +8,7 @@ import productRouter from "../routes/productRouter.js";
 import cartRouter from "../routes/cartRouter.js";
 import userRouter from "../routes/userRouter.js";
 import sessionRouter from "../routes/sessionRouter.js";
+import mailingRouter from "../routes/mailingRouter.js";
 
 import errorHandler from "../middlewares/errorHandler.js";
 
@@ -39,6 +40,7 @@ class AppExpress {
     app.use("/api/carts", cartRouter);
     app.use("/api/sessions", sessionRouter);
     app.use("/api/users", userRouter);
+    app.use("/api/email", mailingRouter)
     app.use(errorHandler);
   }
 

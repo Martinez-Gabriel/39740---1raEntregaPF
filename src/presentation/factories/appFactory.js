@@ -13,3 +13,4 @@ class AppFactory
 }
 
 export default AppFactory;
+
