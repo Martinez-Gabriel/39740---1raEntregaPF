@@ -38,7 +38,7 @@ class AppExpress {
     //IMPORTANDO ROUTES.
     app.use("/api/products", productRouter);
     app.use("/api/carts", cartRouter);
-    app.use("/api/sessions", sessionRouter);
+    app.use("/api/session", sessionRouter);
     app.use("/api/users", userRouter);
     app.use("/api/email", mailingRouter)
     app.use(errorHandler);

@@ -20,9 +20,9 @@ class MailingManager {
             to:'gabrielalejandromartinez96@gmail.com',
             subject: 'mailing test',
             html:   
-                    `<div>
-                        <h1>This is a mensage from mailing system!</h1>
-                    </div>`,
+                `<div>
+                    <h1>This is a mensage from mailing system!</h1>
+                </div>`,
             attachments: [],
         };
         await transport.sendMail(mailOptions);

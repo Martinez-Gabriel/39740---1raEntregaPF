@@ -1,5 +1,5 @@
 import UserManager from "../../domain/managers/userManager.js";
-import { createHash, generateToken, isValidPassword } from "../../shared/index.js";
+import { createHash, generateToken, isValidPassword } from "../../shared/sessionShared.js";
 
 export const login = async (req, res, next) => {
   try {
