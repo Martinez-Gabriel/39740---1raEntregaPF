@@ -81,7 +81,6 @@ class ProductDao {
     return productModel.deleteOne({ _id: id });
   }
 
-  
 }
 
 

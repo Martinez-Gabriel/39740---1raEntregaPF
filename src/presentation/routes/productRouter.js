@@ -8,7 +8,7 @@ import ProductController, {
 
 const productRouter = Router();
 
-productRouter.get("/?category=?limit=?page=1", ProductController.getAll);
+productRouter.get("/category=?limit=?page=1", ProductController.getAll);
 productRouter.get("/:id", getOne);
 productRouter.post("/", save);
 productRouter.put("/:id", update);
